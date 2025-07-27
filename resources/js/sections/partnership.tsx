@@ -10,7 +10,7 @@ const Logos = [
     "Partnership 7",
 ];
 
-export default function Parner() {
+export default function Partnership() {
     const duplicated = [...Logos, ...Logos];
 
     return (
