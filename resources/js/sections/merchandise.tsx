@@ -39,21 +39,21 @@ const Cards = [
 
 ];
 
-export default function Discography() {
+export default function Merchandise() {
     const cardsItem = [...Cards];
 
     return (
         <div className="bg-black px-7 overflow-hidden w-full">
-            <div className="flex justify-between ">
+            <div className="flex justify-between">
                 <div>
                     <h2 className="text-yellow-300 text-3xl font-justme mb-4">
                         Discography
                     </h2>
                 </div>
                 <div>
-                <Button className="font-sans text-lg border-2 border-yellow-300 rounded-4xl bg-transparent cursor-pointer text-yellow-300 font-extrabold ">
-                    SEE MORE
-                </Button>
+                    <Button className="font-sans text-lg border-2 border-yellow-300 rounded-4xl bg-transparent cursor-pointer text-yellow-300 font-extrabold ">
+                        SEE MORE
+                    </Button>
                 </div>
             </div>
             <div className="flex justify-center  mt-2">
