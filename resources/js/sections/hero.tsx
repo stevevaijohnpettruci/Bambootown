@@ -1,5 +1,5 @@
 import BackgroundImage from "@/components/ui/background-image";
-import { Head, Link, usePage } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 import { motion } from "motion/react";
 
 export default function Hero() {

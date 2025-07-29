@@ -38,7 +38,7 @@ export default function Videos() {
                     </div>
                     <div className="py-7 items-center justify-center flex flex-col gap-5">
                         <h1 className="text-center font-extrabold text-xl text-white">SEE OUR ACTIVITIES AND SUPPORT US HERE</h1>
-                        <Button className="bg-transparent text-yellow-300 border-2 rounded-2xl border-yellow-300 font-bold text-md cursor-pointer">CLICK HERE</Button>
+                        <Button className="bg-transparent text-yellow-300 border-2 rounded-2xl border-yellow-300 font-bold text-lg cursor-pointer">CLICK HERE</Button>
                     </div>
                 </div>
             </BackgroundImage>
