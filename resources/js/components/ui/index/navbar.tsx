@@ -52,7 +52,7 @@ export default function Navbar() {
                 }`}
             >
                 <div>
-                <AppLogoIcon />
+                    <AppLogoIcon className='w-20 h-max'></AppLogoIcon>
                 </div>
 
                 <div className="flex gap-3 flex-wrap items-center">

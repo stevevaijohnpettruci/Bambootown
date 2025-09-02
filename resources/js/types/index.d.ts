@@ -10,6 +10,7 @@ export interface BreadcrumbItem {
     href: string;
 }
 
+
 export interface SliderItem {
     image: string;
 }
@@ -19,11 +20,23 @@ export interface NavGroup {
     items: NavItem[];
 }
 
+
 export interface NavItem {
     title: string;
-    href: string;
+    href:string;
     icon?: LucideIcon | null;
     isActive?: boolean;
+    children?: NavItem[];
+}
+
+export interface Product{
+    name:string;
+    price:string;
+    size:string;
+    product_availables:string;
+    product_description:string;
+    product_link:string;
+    image_path:File | null;
 }
 
 export interface SharedData {

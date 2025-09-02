@@ -1,6 +1,4 @@
-import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import SliderWithDots from "@/components/ui/slider-with-dot"
 const Cards = [
   { image: "/images/Baju.jpg" },

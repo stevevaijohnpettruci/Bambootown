@@ -1,4 +1,4 @@
-import { useRef } from "react";
+
 import { SliderItem } from "@/types"; // atau wherever index.d.ts berada
 
 type SliderWithDotsProps = {

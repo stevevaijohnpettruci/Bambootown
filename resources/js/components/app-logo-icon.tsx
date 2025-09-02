@@ -7,8 +7,7 @@ export default function AppLogoIcon(props: React.ImgHTMLAttributes<HTMLImageElem
             
             src="/Bambootown Logo.png"
             alt="Bambootown"
-            {...props}
-            className='h-10 w-full'         
+            {...props}     
         />
     );
 }
