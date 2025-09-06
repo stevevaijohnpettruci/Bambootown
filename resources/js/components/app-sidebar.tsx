@@ -27,7 +27,7 @@ const mainNavItems: NavItem[] = [
             },
             {
                 title:'Category',
-                href:'/product/categories/',
+                href:'/product/categories',
             },
 
         ]
@@ -43,13 +43,13 @@ const mainNavItems: NavItem[] = [
             },
             {
                 title:'Category',
-                href:'/video/categories/'
+                href:'/video/categories',
             }
         ]
     },
     {
         title: 'Event and Tour',
-        href: 'event-tour',
+        href: '/event-tour',
         icon: Calendar,
     },
     {

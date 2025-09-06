@@ -171,7 +171,7 @@ export default function EventTour() {
                 className="w-48"
                 />
                 <Link
-                href="/event-tour/create"
+                href={route('event.create')}
                 className="bg-yellow-300 flex items-center w-40 justify-center p-1 rounded-sm hover:bg-yellow-400"
                 >
                 <Plus className="w-5 h-5" />
@@ -231,7 +231,7 @@ export default function EventTour() {
                         {event.event_address}
                     </TableCell>
                     <TableCell className="text-xs font-poppins text-blue-500 underline hover:text-blue-700">
-                        <Link href={event.event_ticket_link}>Link</Link>
+                        <Link href  ={event.event_ticket_link}>Link</Link>
                     </TableCell>
                     
                     <TableCell className="flex gap-1 justify-center py-2">

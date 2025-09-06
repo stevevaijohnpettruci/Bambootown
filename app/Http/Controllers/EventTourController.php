@@ -28,4 +28,56 @@ class EventTourController extends Controller
                 ]
             ]);
     }
+
+    public function create(){
+        
+        return Inertia::render('dashboard/event-tour/create');
+    }
+
+    
+    public function store(Request $request){
+        $validated = $request->validate([
+            'event_name'        =>  'required|string|max:255',
+            'event_description' =>  'required|string|max:255',
+            'event_date'        =>  'required|date_format:Y-m-d',
+            'event_address'     =>  'required|string|max:255',
+            'event_ticket_link' =>  'required|string|max:255',
+        ]);
+
+        EventTour::create($validated);
+        return redirect()->route('event.index')->with('success',"Data berhasil ditambahkan");
+    }
+
+    public function edit($id){
+        $data_event = EventTour::findOrFail($id);
+        return Inertia::render('dashboard/event-tour/edit',[
+            'event' => $data_event,
+        ]);
+    }
+
+    public function update(Request $request, $id){
+        $validated = $request->validate([
+            'event_name'        =>  'required|string|max:255',
+            'event_description' =>  'required|string|max:255',
+            'event_date'        =>  'required|date_format:Y-m-d',
+            'event_address'     =>  'required|string|max:255',
+            'event_ticket_link' =>  'required|string|max:255',
+        ]);
+
+        $event = EventTour::findOrFail($id);
+
+        $event->update($validated);
+
+        return redirect()
+            ->route('event.index')
+            ->with('success', "Data berhasil diupdate");
+    }
+
+    public function destroy($id){
+        $event = EventTour::findOrFail($id);
+        $event_name = $event->name;
+        $event->delete();
+
+        return redirect()->route('event.index')->with('success',"Data $event_name Berhasil dihapus");
+    }
 }

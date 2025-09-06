@@ -40,12 +40,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('product/{id}', [ProductController::class, 'update'])->name('product.update');
     Route::delete('product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
-    Route::get('product/categories/', [ProductCategoryController::class, 'index'])->name('categories.index');
-    Route::get('product/categories/create-category', [ProductCategoryController::class, 'create'])->name('categories.create-category');
-    Route::post('product/categories/',[ProductCategoryController::class, 'store'])->name('categories.store');
-    Route::get('product/categories/{id}/edit',[ProductCategoryController::class, 'edit'])->name('categories.edit');
-    Route::put('product/categories/{id}',[ProductCategoryController::class, 'update'])->name('categories.update');
-    Route::delete('product/categories/{id}',[ProductCategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::prefix('product/categories')->name('product.categories.')->group(function () {
+        Route::get('/', [ProductCategoryController::class, 'index'])->name('index');
+        Route::get('/create', [ProductCategoryController::class, 'create'])->name('create');
+        Route::post('/', [ProductCategoryController::class, 'store'])->name('store');
+        Route::get('/{id}/edit', [ProductCategoryController::class, 'edit'])->name('edit');
+        Route::put('/{id}', [ProductCategoryController::class, 'update'])->name('update');
+        Route::delete('/{id}', [ProductCategoryController::class, 'destroy'])->name('destroy');
+    });
 
     Route::get('video', [VideoController::class, 'index'])->name('video.index'); 
     Route::get('video/create',[VideoController::class, 'create'])->name('video.create');
@@ -54,14 +56,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('video/{id}',[VideoController::class, 'update'])->name('video.update');
     Route::delete('video/{id}',[VideoController::class, 'destroy'])->name('video.destroy');
 
-    Route::get('video/categories/',[VideoCategoryController::class, 'index'])->name('categories.index');
-    Route::get('video/categories/create',[VideoCategoryController::class, 'create'])->name('categories.create');
-    Route::post('video/categories/',[VideoCategoryController::class,'store'])->name('categories.store');
-    Route::get('video/categories/{id}/edit',[VideoCategoryController::class,'edit'])->name('categories.edit');
-    Route::put('video/categories/{id}',[VideoCategoryController::class,'update'])->name('categories.update');
-    Route::delete('video/categories/{id}',[VideoCategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::prefix('video/categories')->name('video.categories.')->group(function () {
+        Route::get('/', [VideoCategoryController::class, 'index'])->name('index');
+        Route::get('/create', [VideoCategoryController::class, 'create'])->name('create');
+        Route::post('/', [VideoCategoryController::class,'store'])->name('store');
+        Route::get('/{id}/edit', [VideoCategoryController::class,'edit'])->name('edit');
+        Route::put('/{id}', [VideoCategoryController::class,'update'])->name('update');
+        Route::delete('/{id}', [VideoCategoryController::class, 'destroy'])->name('destroy');
+    });
 
-    Route::get('event-tour',[EventTourController::class, 'index'])->name('event.index');
+    Route::prefix('event-tour')->name('event.')->group(function () {
+        Route::get('/', [EventTourController::class, 'index'])->name('index');
+        Route::get('/create', [EventTourController::class, 'create'])->name('create');
+        Route::post('/',[EventTourController::class, 'store'])->name('store');
+        Route::get('/{id}/edit',[EventTourController::class, 'edit'])->name('edit');
+        Route::put('/{id}',[EventTourController::class,'update'])->name('update');
+        Route::delete('/{id}',[EventTourController::class, 'destroy'])->name('destroy');
+    });
 });
 
 require __DIR__.'/settings.php';

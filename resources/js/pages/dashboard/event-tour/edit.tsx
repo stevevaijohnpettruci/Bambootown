@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import FormError from '@/components/ui/toast-error';
 import { Save } from 'lucide-react';
 import { useForm } from '@inertiajs/react';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { router } from '@inertiajs/react';
 const breadcrumbs: BreadcrumbItem[] = [
     { title: 'Event Tour', href: '/event-tour' },
@@ -19,31 +19,45 @@ type Address = {
     city:string;
     street:string;
 }
+interface EventData {
+    id:number;
+    event_name: string;
+    event_description: string;
+    event_date:string ;
+    event_address: Address;
+    event_ticket_link: string;
+    _method?:string;
+}
 
+interface EditProps {
+    event: EventData; // Data produk dari server (Inertia props)
+}
 type EventTourForm = {
     event_name: string;
     event_description: string;
     event_date:string ;
     event_address: Address;
     event_ticket_link: string;
+    _method?:string;
 }
 
-export default function Create() {
+export default function Edit({event} : EditProps) {
+    
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const { data, setData, post, processing, errors, reset } = useForm<EventTourForm>({
-        event_name: '',
-        event_description: '',
-        event_date: '',
+    const { data, setData, processing, errors, reset } = useForm<EventTourForm>({
+        event_name: event?.event_name || '',
+        event_description: event?.event_description || '',
+        event_date: event?.event_date || '',
         event_address: {
-            city:'',
-            street:''
+            city: event?.event_address?.city|| '',
+            street:event?.event_address.street || ''
         },
-        event_ticket_link: ''
+        event_ticket_link: '',
+        _method:'PUT',
     });
-
-
-    const submit = (event: React.FormEvent) => {
-        event.preventDefault();
+    
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
         setIsSubmitting(true);
 
         const payload = {
@@ -51,12 +65,15 @@ export default function Create() {
             event_address: `${data.event_address.city}, ${data.event_address.street}`,
         };
 
-        router.post('/event-tour', payload, {
-            onSuccess: () => reset(),
+        router.put(`/event-tour/${event.id}`, payload, {
+            onSuccess: () => {
+                reset();
+                router.visit('/event-tour');
+            } ,
             onError: (errors) => console.error(errors),
             onFinish: () => setIsSubmitting(false),
         });
-        };
+    };
         
     
 
@@ -67,10 +84,12 @@ export default function Create() {
 
             <div className="w-full mx-auto p-6">
                 <div className="bg-white rounded-lg p-5">
-                    <h1 className="text-2xl font-semibold mb-6 text-gray-900">
-                        Tambah Data Event & Tour
-                    </h1>
-
+                    <div className="flex items-center justify-between mb-6">
+                        <h1 className="text-2xl font-semibold mb-6 text-gray-900">
+                        Edit Data Event & Tour
+                        </h1>
+                        <div className="text-sm text-gray-500">ID: {event?.id}</div>
+                    </div>
                     <form onSubmit={submit} className="space-y-6">
                         {/* Nama Event & Tour */}
                         <div>
@@ -81,7 +100,7 @@ export default function Create() {
                                 id="name"
                                 value={data.event_name}
                                 onChange={(event) => setData('event_name', event.target.value)}
-                                placeholder="Masukkan nama produk"
+                                placeholder="Masukkan nama acara..."
                                 className={errors.event_name ? 'border-red-500' : ''}
                                 required
                             />
@@ -96,7 +115,7 @@ export default function Create() {
                                 id="product_description"
                                 value={data.event_description}
                                 onChange={(event) => setData('event_description', event.target.value)}
-                                placeholder="Masukkan deskripsi detail produk..."
+                                placeholder="Masukkan deskripsi acara..."
                                 maxLength={255}
                                 rows={4}
                                 className={errors.event_description ? 'border-red-500' : ''}
